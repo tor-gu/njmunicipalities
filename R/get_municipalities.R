@@ -1,3 +1,4 @@
+#' @export
 get_municipalities <- function(year = 2021, geoid_year = year) {
   if (year == geoid_year) {
     municipalities |>
