@@ -11,15 +11,18 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+renv::use(
+  "tor-gu/njmunicipalities"
+)
 ```
 
 # njmunicipalities
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/tor-gu/njoaguof/workflows/R-CMD-check/badge.svg)](https://github.com/tor-gu/njoaguof/actions)
+[![R-CMD-check](https://github.com/tor-gu/njmunicipalities/workflows/R-CMD-check/badge.svg)](https://github.com/tor-gu/njmunicipalities/actions)
 <!-- badges: end -->
 
-This is a data package for R that contains every every county
+This is a data package for R that contains every county
 and municipality in New Jersey, from 2000 to 2021.
 
 ## Installation
@@ -33,11 +36,12 @@ devtools::install_github("tor-gu/njmunicipalities")
 ## Example
 ```{r}
 library(njmunicipalities)
+
 # Municipality list for 2007
-#get_municipalities(2007)
+get_municipalities(2007) |> head(n=5)
 
 # County list
-head(counties, n=3)
+counties |> head(n=5)
 ```
 
 ## Changes in NJ municipalites, 2000-2021

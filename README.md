@@ -5,11 +5,11 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/tor-gu/njoaguof/workflows/R-CMD-check/badge.svg)](https://github.com/tor-gu/njoaguof/actions)
+[![R-CMD-check](https://github.com/tor-gu/njmunicipalities/workflows/R-CMD-check/badge.svg)](https://github.com/tor-gu/njmunicipalities/actions)
 <!-- badges: end -->
 
-This is a data package for R that contains every every county and
-municipality in New Jersey, from 2000 to 2021.
+This is a data package for R that contains every county and municipality
+in New Jersey, from 2000 to 2021.
 
 ## Installation
 
@@ -25,15 +25,28 @@ devtools::install_github("tor-gu/njmunicipalities")
 
 ``` r
 library(njmunicipalities)
+
 # Municipality list for 2007
-#get_municipalities(2007)
+get_municipalities(2007) |> head(n=5)
+#> # A tibble: 5 × 3
+#>   GEOID      county          municipality        
+#>   <chr>      <chr>           <chr>               
+#> 1 3400100100 Atlantic County Absecon city        
+#> 2 3400102080 Atlantic County Atlantic City city  
+#> 3 3400107810 Atlantic County Brigantine city     
+#> 4 3400108680 Atlantic County Buena borough       
+#> 5 3400108710 Atlantic County Buena Vista township
 
 # County list
-head(counties, n=3)
-#>   GEOID            County
-#> 1 34001   Atlantic County
-#> 2 34003     Bergen County
+counties |> head(n=5)
+#> # A tibble: 5 × 2
+#>   GEOID county           
+#>   <chr> <chr>            
+#> 1 34001 Atlantic County  
+#> 2 34003 Bergen County    
 #> 3 34005 Burlington County
+#> 4 34007 Camden County    
+#> 5 34009 Cape May County
 ```
 
 ## Changes in NJ municipalites, 2000-2021
