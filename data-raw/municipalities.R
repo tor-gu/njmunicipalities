@@ -3,24 +3,24 @@ gz_2000_file <- fs::path("data-raw", "gazetteer_2000.txt")
 
 counties <- readr::read_tsv(counties_file, col_types = "cc")
 gz_2000 <- readr::read_fwf(gz_2000_file,
-                           readr::fwf_widths(c(2, 10, 60), c("state","GEOID","Municipality"))
-) |> dplyr::mutate(Municipality = stringr::str_trim(Municipality),
+                           readr::fwf_widths(c(2, 10, 60), c("state","GEOID","municipality"))
+) |> dplyr::mutate(municipality = stringr::str_trim(municipality),
                    GEOID = as.character(GEOID)) |>
-  dplyr::filter(Municipality != "County subdivisions not defined") |>
+  dplyr::filter(municipality != "County subdivisions not defined") |>
   dplyr::select(-state) |>
   dplyr::mutate(COUNTY_GEOID = stringr::str_sub(GEOID, 1, 5)) |>
   dplyr::left_join(counties, by=c("COUNTY_GEOID"="GEOID")) |>
-  dplyr::select(GEOID, County, Municipality)
+  dplyr::select(GEOID, county, municipality)
 
 
 municipalities <- gz_2000 |>
   dplyr::mutate(GEOID_Y2K = GEOID,
-                FirstYear = 2000,
-                FinalYear = 2021) |>
+                first_year = 2000,
+                final_year = 2021) |>
   dplyr::relocate(GEOID_Y2K)
 
 municipality_updates <- tibble::tribble(
-  ~GEOID,      ~FinalYear,
+  ~GEOID,      ~final_year,
   "3401309220", 2009, # Caldwell boro changed GEOID from 09220 to 09250
   "3402177210", 2007, # Washington twp (Mercer) became Robbinsville in 2008
   "3402568670", 2004, # South Belmar became Lake Como in 2005
@@ -31,7 +31,7 @@ municipality_updates <- tibble::tribble(
 )
 
 municipality_inserts <- tibble::tribble(
-  ~GEOID_Y2K,  ~GEOID,      ~County,          ~Municipality,         ~FirstYear, ~FinalYear,
+  ~GEOID_Y2K,  ~GEOID,      ~county,          ~municipality,         ~first_year,~final_year,
   "3401309220","3401309250","Essex County",   "Caldwell borough",     2010,      2021,
   "3402177210","3402163850","Mercer County",  "Robbinsville township",2008,      2021,
   "3402568670","3402537560","Monmouth County","Lake Como borough",    2005,      2021,
@@ -43,7 +43,7 @@ municipality_inserts <- tibble::tribble(
 municipalities <- municipalities |>
   dplyr::rows_update(municipality_updates, by="GEOID") |>
   dplyr::bind_rows(municipality_inserts) |>
-  dplyr::arrange(GEOID_Y2K, FirstYear)
+  dplyr::arrange(GEOID_Y2K, first_year)
 
 usethis::use_data(counties, overwrite = TRUE)
 usethis::use_data(municipalities, internal = TRUE, overwrite = TRUE)

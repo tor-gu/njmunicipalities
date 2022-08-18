@@ -1,4 +1,4 @@
-GEOID	County
+GEOID	county
 34001	Atlantic County
 34003	Bergen County
 34005	Burlington County
