@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/tor-gu/njmunicipalities/workflows/R-CMD-check/badge.svg)](https://github.com/tor-gu/njmunicipalities/actions)
+[![R-CMD-check](https://github.com/tor-gu/njmunicipalities/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tor-gu/njmunicipalities/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 This is a data package for R that contains every county and municipality
