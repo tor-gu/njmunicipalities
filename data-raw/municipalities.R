@@ -43,6 +43,8 @@ municipality_inserts <- tibble::tribble(
 municipalities <- municipalities |>
   dplyr::rows_update(municipality_updates, by="GEOID") |>
   dplyr::bind_rows(municipality_inserts) |>
+  dplyr::mutate(first_year = as.integer(first_year)) |>
+  dplyr::mutate(final_year = as.integer(final_year)) |>
   dplyr::arrange(GEOID_Y2K, first_year)
 
 usethis::use_data(counties, overwrite = TRUE)
