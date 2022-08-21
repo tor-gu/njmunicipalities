@@ -33,12 +33,28 @@ You can install the development version of njmunicipalities from [GitHub](https:
 # install.packages("devtools")
 devtools::install_github("tor-gu/njmunicipalities")
 ```
-## Example
+## Examples
 ```{r}
 library(njmunicipalities)
 
 # Municipality list for 2007
 get_municipalities(2007) |> head(n=5)
+
+# Municipality list for 2002 with GEOIDs from 2018
+get_municipalities(2002, geoid_year = 2018) |> head(n=5)
+
+# Municipality list for 2002 with GEOIDs from 2018 added as
+# seperate column
+get_municipalities(2002, 
+                   geoid_year = 2018, 
+                   geoid_ref_as_ref_column = TRUE) |> 
+  head(n=5)
+
+# Cross reference table, comparing GEOID for years 2010-2020 to 
+# reference year 2005
+get_geoid_cross_references(2005, 2010:2020) |>
+  dplyr::arrange(GEOID_ref, year) |> 
+  head(n=5)
 
 # County list
 counties |> head(n=5)

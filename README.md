@@ -21,7 +21,7 @@ You can install the development version of njmunicipalities from
 devtools::install_github("tor-gu/njmunicipalities")
 ```
 
-## Example
+## Examples
 
 ``` r
 library(njmunicipalities)
@@ -36,6 +36,46 @@ get_municipalities(2007) |> head(n=5)
 #> 3 3400107810 Atlantic County Brigantine city     
 #> 4 3400108680 Atlantic County Buena borough       
 #> 5 3400108710 Atlantic County Buena Vista township
+
+# Municipality list for 2002 with GEOIDs from 2018
+get_municipalities(2002, geoid_year = 2018) |> head(n=5)
+#> # A tibble: 5 × 3
+#>   GEOID      county          municipality        
+#>   <chr>      <chr>           <chr>               
+#> 1 3400100100 Atlantic County Absecon city        
+#> 2 3400102080 Atlantic County Atlantic City city  
+#> 3 3400107810 Atlantic County Brigantine city     
+#> 4 3400108680 Atlantic County Buena borough       
+#> 5 3400108710 Atlantic County Buena Vista township
+
+# Municipality list for 2002 with GEOIDs from 2018 added as
+# seperate column
+get_municipalities(2002, 
+                   geoid_year = 2018, 
+                   geoid_ref_as_ref_column = TRUE) |> 
+  head(n=5)
+#> # A tibble: 5 × 4
+#>   GEOID_ref  GEOID      county          municipality        
+#>   <chr>      <chr>      <chr>           <chr>               
+#> 1 3400100100 3400100100 Atlantic County Absecon city        
+#> 2 3400102080 3400102080 Atlantic County Atlantic City city  
+#> 3 3400107810 3400107810 Atlantic County Brigantine city     
+#> 4 3400108680 3400108680 Atlantic County Buena borough       
+#> 5 3400108710 3400108710 Atlantic County Buena Vista township
+
+# Cross reference table, comparing GEOID for years 2010-2020 to 
+# reference year 2005
+get_geoid_cross_references(2005, 2010:2020) |>
+  dplyr::arrange(GEOID_ref, year) |> 
+  head(n=5)
+#> # A tibble: 5 × 3
+#>    year GEOID_ref  GEOID     
+#>   <int> <chr>      <chr>     
+#> 1  2010 3400100100 3400100100
+#> 2  2011 3400100100 3400100100
+#> 3  2012 3400100100 3400100100
+#> 4  2013 3400100100 3400100100
+#> 5  2014 3400100100 3400100100
 
 # County list
 counties |> head(n=5)
