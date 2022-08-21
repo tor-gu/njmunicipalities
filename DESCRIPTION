@@ -1,7 +1,7 @@
 Package: njmunicipalities
 Type: Package
 Title: NJ Municipalities data package
-Version: 0.1.0.9000
+Version: 0.2.0
 Authors@R: 
     person("Tor", "Gunston", , "tor.gunston@protonmail.com", role = c("aut", "cre"))
 Description: NJ Municipalities, 2000-2021.
