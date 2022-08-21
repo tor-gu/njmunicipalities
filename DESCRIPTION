@@ -13,5 +13,12 @@ LazyData: true
 Depends: 
     R (>= 2.10)
 Imports: 
-    dplyr
+    dplyr,
+    magrittr,
+    purrr,
+    stringr
 RoxygenNote: 7.2.1
+Suggests: 
+    testthat (>= 3.0.0),
+    tibble
+Config/testthat/edition: 3

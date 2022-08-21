@@ -4,12 +4,18 @@
 \alias{get_municipalities}
 \title{Get a list of NJ municipalities, by year}
 \usage{
-get_municipalities(year = 2021, geoid_year = year)
+get_municipalities(
+  year = MAX_YEAR,
+  geoid_year = year,
+  geoid_ref_as_ref_column = FALSE
+)
 }
 \arguments{
 \item{year}{The year, from 2000 to 2021. The default is 2021.}
 
-\item{geoid_year}{The}
+\item{geoid_year}{The year to use for GEOIDs}
+
+\item{geoid_ref_as_ref_column}{If TRUE, add a separate column for the reference GEOID}
 }
 \value{
 A table with `GEOID`, `county` and `municipality`
@@ -18,11 +24,16 @@ A table with `GEOID`, `county` and `municipality`
 Return the list of NJ municipalities that existed in the
 specified year, using the name of the municipality as it was
 known in that year, and the US Census GEOID in use in that year.
-
+}
+\details{
 To use the GEOIDs from a different year, specify `geoid_year`.
 If `year` < 2013 and `geoid_year` >= 2013, then the `GEOID` for
 for Princeton township will the GEOID in use until 2013, when
 the township ceased to exist.
+
+The reference-year GEOID will replace the actual GEOID, unless
+`geoid_ref_as_ref_column` is `TRUE`, in which case the reference
+year GEOID will be put in a separate column called `GEOID_ref`.
 }
 \examples{
 # Return all municipalities in existence in 2005, using 2005 names
@@ -32,5 +43,9 @@ get_municipalities(2005)
 # Return all municipalities from the year 2000, using the GEOIDs
 # in use in 2021.
 get_municipalities(2000, geoid_year=2021)
+
+# Return all municipalities from the year 2008, with the year
+# 2000 GEOID in a separate column.
+get_municipalities(2008, geoid_year=2000, geoid_ref_as_ref_column=TRUE)
 
 }
