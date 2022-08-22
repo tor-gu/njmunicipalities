@@ -50,6 +50,11 @@ municipalities <- municipalities |>
 PRINCETON_BORO_GEOID  <- "3402160900"
 PRINCETON_TWP_GEOID <- "3402160915"
 
-usethis::use_data(PRINCETON_BORO_GEOID, PRINCETON_TWP_GEOID, counties,
+PINE_VALLEY_BORO_GEOID <- "3400758920"
+PINE_HILL_BORO_GEOID <- "3400758770"
+
+usethis::use_data(PRINCETON_BORO_GEOID, PRINCETON_TWP_GEOID,
+                  PINE_VALLEY_BORO_GEOID, PINE_HILL_BORO_GEOID,
+                  counties,
                   overwrite = TRUE)
 usethis::use_data(municipalities, internal = TRUE, overwrite = TRUE)
