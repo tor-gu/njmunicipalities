@@ -47,5 +47,9 @@ municipalities <- municipalities |>
   dplyr::mutate(final_year = as.integer(final_year)) |>
   dplyr::arrange(GEOID_Y2K, first_year)
 
-usethis::use_data(counties, overwrite = TRUE)
+PRINCETON_TWP_GEOID  <- "3402160900"
+PRINCETON_BORO_GEOID <- "3402160915"
+
+usethis::use_data(PRINCETON_BORO_GEOID, PRINCETON_TWP_GEOID, counties,
+                  overwrite = TRUE)
 usethis::use_data(municipalities, internal = TRUE, overwrite = TRUE)
