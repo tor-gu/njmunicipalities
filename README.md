@@ -67,7 +67,8 @@ get_municipalities() |> head(n=5)
 ```
 
 If the year is specified (from 2000 to 2021), the table will reflect the
-names and GEOIDs in effect for that year. Here is the list for 2007.
+names and US Census GEOIDs in effect for that year. Here is the list for
+2007.
 
 ``` r
 # Municipality list for 2007
