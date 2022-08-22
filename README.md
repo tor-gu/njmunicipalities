@@ -207,7 +207,7 @@ constants `PRINCETON_TWP_GEOID` and `PRINCETON_BORO_GEOID`.
 
 ``` r
 c(njmunicipalities::PRINCETON_TWP_GEOID, njmunicipalities::PRINCETON_BORO_GEOID)
-#> [1] "3402160900" "3402160915"
+#> [1] "3402160915" "3402160900"
 ```
 
 As an example, consider the municipal election data in
