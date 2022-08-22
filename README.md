@@ -207,7 +207,7 @@ For convenience in dealing with this issue, this package includes the
 constants `PRINCETON_TWP_GEOID` and `PRINCETON_BORO_GEOID`.
 
 ``` r
-c(njmunicipalities::PRINCETON_TWP_GEOID, njmunicipalities::PRINCETON_BORO_GEOID)
+c(PRINCETON_TWP_GEOID, PRINCETON_BORO_GEOID)
 #> [1] "3402160915" "3402160900"
 ```
 
@@ -225,6 +225,22 @@ electoin_by_municipality_combined <-
                                        GEOID)) |>
   dplyr::group_by(year, office, GEOID, party) |>
   dplyr::summarize(vote = sum(vote), .groups = "drop")
+```
+
+#### Pine Valley and the year 2022.
+
+In 2022, Pine Valley borough was merged into Pine Hill borough. The
+current version of this package does not cover the year 2022 because the
+[US Census
+Gazetteer](https://www.census.gov/geographies/reference-files/time-series/geo/gazetteer-files.html)
+for 2022 has not yet been published.
+
+As a conveniene for dealing with 2022 datasets, this package includes
+constants `PINE_VALLEY_BORO_GEOID` and `PINE_HILL_BORO_GEOID`.
+
+``` r
+c(PINE_VALLEY_BORO_GEOID, PINE_HILL_BORO_GEOID)
+#> [1] "3400758920" "3400758770"
 ```
 
 #### County list
