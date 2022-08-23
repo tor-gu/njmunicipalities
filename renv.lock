@@ -90,10 +90,10 @@
     },
     "callr": {
       "Package": "callr",
-      "Version": "3.7.1",
+      "Version": "3.7.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "2fda237f24bc56508f31394beaa56877",
+      "Hash": "358689cac9fe93b1bb3a19088d2dbed8",
       "Requirements": [
         "R6",
         "processx"
@@ -430,15 +430,15 @@
     },
     "njelections": {
       "Package": "njelections",
-      "Version": "0.2.0",
+      "Version": "0.3.0",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "tor-gu",
       "RemoteRepo": "njelections",
       "RemoteRef": "main",
-      "RemoteSha": "7f06824e7ad34517bf63a789aa7557e7695bd971",
-      "Hash": "38584783f9b3955be11711365663add6",
+      "RemoteSha": "6f6f0a6377ff35f215d812c58696969aade010ae",
+      "RemoteHost": "api.github.com",
+      "Hash": "6fe076c7b3b2cf1d152e6e2e66cf9755",
       "Requirements": []
     },
     "openssl": {
@@ -634,10 +634,10 @@
     },
     "rstudioapi": {
       "Package": "rstudioapi",
-      "Version": "0.13",
+      "Version": "0.14",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "06c85365a03fdaf699966cc1d3cf53ea",
+      "Hash": "690bd2acc42a9166ce34845884459320",
       "Requirements": []
     },
     "sass": {
