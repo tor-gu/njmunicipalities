@@ -151,8 +151,8 @@ get_municipalities(2005,
                    geoid_ref_as_ref_column = TRUE) |>
   dplyr::anti_join(get_municipalities(2004)) |>
   dplyr::left_join(get_municipalities(2004), 
-                   by=c("GEOID_ref"="GEOID", "county"),
-                   suffix=c("","_ref"))
+                   by = c("GEOID_ref" = "GEOID", "county"),
+                   suffix = c("", "_ref"))
 #> Joining, by = c("GEOID", "county", "municipality")
 #> # A tibble: 1 × 5
 #>   GEOID_ref  GEOID      county          municipality      municipality_ref    
@@ -164,7 +164,7 @@ get_municipalities(2005,
 
 Function `get_geoid_cross_references` will return a table of `GEOID`
 cross-references for a range of years to a specified reference year.
-Here we map all the GEOIDS from the years 2010-2020 to their 2005 GEOID.
+Here we map all the GEOIDs from the years 2010-2020 to their 2005 GEOID.
 
 ``` r
 # Cross reference table, comparing GEOID for years 2010-2020 to 
@@ -187,7 +187,8 @@ get_geoid_cross_references(2005, 2010:2020) |>
 Princeton township and Princeton borough merged in 2013. Because the
 merged municipality retained Princeton borough’s GEOID, Princeton
 township disappears in 2013. This is the only example of a disappearing
-municipality in the dataset.
+municipality in the package (but see [Pine Valley and the year
+2022](#pine-valley-and-the-year-2022)).
 
 The functions `get_municipality` and `get_geoid_cross_references` will
 return `NA` for a reference year GEOID after 2012 for Princeton
@@ -218,16 +219,28 @@ prior to 2013:
 
 ``` r
 library(njelections)
-electoin_by_municipality_combined <-
+election_by_municipality_combined <-
   election_by_municipality |>
   dplyr::mutate(GEOID = dplyr::if_else(GEOID == PRINCETON_TWP_GEOID,
                                        PRINCETON_BORO_GEOID,
                                        GEOID)) |>
   dplyr::group_by(year, office, GEOID, party) |>
   dplyr::summarize(vote = sum(vote), .groups = "drop")
+
+election_by_municipality_combined |> 
+  dplyr::filter(GEOID %in% c(PRINCETON_TWP_GEOID, PRINCETON_BORO_GEOID)) |>
+  head(5)
+#> # A tibble: 5 × 5
+#>    year office    GEOID      party               vote
+#>   <int> <chr>     <chr>      <chr>              <int>
+#> 1  2004 President 3402160900 Constitution Party     5
+#> 2  2004 President 3402160900 Democratic          9751
+#> 3  2004 President 3402160900 Green Party           12
+#> 4  2004 President 3402160900 Independent          111
+#> 5  2004 President 3402160900 Libertarian Party     40
 ```
 
-#### Pine Valley and the year 2022.
+#### Pine Valley and the year 2022
 
 In 2022, Pine Valley borough was merged into Pine Hill borough. The
 current version of this package does not cover the year 2022 because the
@@ -246,7 +259,8 @@ c(PINE_VALLEY_BORO_GEOID, PINE_HILL_BORO_GEOID)
 #### County list
 
 For convenience, this package also includes a table of counties and
-their GEOIDS. There have been no changes to counties from 2000 to 2021.
+their GEOIDS. There have been no changes to New Jersey counties from
+2000 to 2021.
 
 ``` r
 # County list
