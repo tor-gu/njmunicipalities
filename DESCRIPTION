@@ -5,7 +5,7 @@ Version: 0.4.0
 Authors@R: 
     person("Tor", "Gunston", , "tor.gunston@protonmail.com", role = c("aut", "cre"))
 Description: NJ Municipalities, 2000-2021.
-    Name and GEOID for every NJ Municipality and County, for the
+    Name and GEOID for every NJ municipality and county, for the
     years 2000-2021.
 License: CC0
 Encoding: UTF-8
