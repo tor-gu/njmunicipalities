@@ -11,7 +11,7 @@ get_municipalities(
 )
 }
 \arguments{
-\item{year}{The year, from 2000 to 2021. The default is 2021.}
+\item{year}{The year, from 2000 to 2022. The default is 2022.}
 
 \item{geoid_year}{The year to use for GEOIDs}
 
@@ -28,7 +28,7 @@ known in that year, and the US Census GEOID in use in that year.
 \details{
 To use the GEOIDs from a different year, specify `geoid_year`.
 If `year` < 2013 and `geoid_year` >= 2013, then the `GEOID` for
-for Princeton township will the GEOID in use until 2013, when
+Princeton township will the GEOID in use until 2013, when
 the township ceased to exist.
 
 The reference-year GEOID will replace the actual GEOID, unless

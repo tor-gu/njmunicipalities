@@ -3,8 +3,11 @@ gz_2000_file <- fs::path("data-raw", "gazetteer_2000.txt")
 
 counties <- readr::read_tsv(counties_file, col_types = "cc")
 gz_2000 <- readr::read_fwf(gz_2000_file,
-                           readr::fwf_widths(c(2, 10, 60), c("state","GEOID","municipality"))
-) |> dplyr::mutate(municipality = stringr::str_trim(municipality),
+                           readr::fwf_widths(
+                             c(2, 10, 60),
+                             c("state","GEOID","municipality"))
+  ) |>
+  dplyr::mutate(municipality = stringr::str_trim(municipality),
                    GEOID = as.character(GEOID)) |>
   dplyr::filter(municipality != "County subdivisions not defined") |>
   dplyr::select(-state) |>
@@ -16,7 +19,7 @@ gz_2000 <- readr::read_fwf(gz_2000_file,
 municipalities <- gz_2000 |>
   dplyr::mutate(GEOID_Y2K = GEOID,
                 first_year = 2000,
-                final_year = 2021) |>
+                final_year = 2022) |>
   dplyr::relocate(GEOID_Y2K)
 
 municipality_updates <- tibble::tribble(
@@ -28,16 +31,17 @@ municipality_updates <- tibble::tribble(
   "3403179820", 2008, # West Paterson became Woodland Park in 2009
   "3402160900", 2012, # Princeton borough became just-plain Princeton in 2013
   "3402160915", 2012, # Princeton twp was absorbed by Princeton boro in 2013
+  "3400758920", 2021, # Pine Valley boro was absorbed by Pine Hill boro in 2022
 )
 
 municipality_inserts <- tibble::tribble(
   ~GEOID_Y2K,  ~GEOID,      ~county,          ~municipality,         ~first_year,~final_year,
-  "3401309220","3401309250","Essex County",   "Caldwell borough",     2010,      2021,
-  "3402177210","3402163850","Mercer County",  "Robbinsville township",2008,      2021,
-  "3402568670","3402537560","Monmouth County","Lake Como borough",    2005,      2021,
-  "3402918130","3402973125","Ocean County",   "Toms River township",  2007,      2021,
-  "3403179820","3403182423","Passaic County", "Woodland Park borough",2009,      2021,
-  "3402160900","3402160900","Mercer County",  "Princeton",            2013,      2021,
+  "3401309220","3401309250","Essex County",   "Caldwell borough",     2010,      2022,
+  "3402177210","3402163850","Mercer County",  "Robbinsville township",2008,      2022,
+  "3402568670","3402537560","Monmouth County","Lake Como borough",    2005,      2022,
+  "3402918130","3402973125","Ocean County",   "Toms River township",  2007,      2022,
+  "3403179820","3403182423","Passaic County", "Woodland Park borough",2009,      2022,
+  "3402160900","3402160900","Mercer County",  "Princeton",            2013,      2022,
 )
 
 municipalities <- municipalities |>

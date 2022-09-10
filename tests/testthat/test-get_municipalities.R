@@ -1,11 +1,11 @@
 test_that("get_municipalities handles bad year", {
   expect_error(get_municipalities(1999))
-  expect_error(get_municipalities(2022))
+  expect_error(get_municipalities(2023))
 })
 
 test_that("get_municipalities handles bad reference year", {
   expect_error(get_municipalities(2010, 1999))
-  expect_error(get_municipalities(2010, 2022))
+  expect_error(get_municipalities(2010, 2023))
 })
 
 
@@ -14,10 +14,12 @@ test_that("get_municipalities returns the correct table size", {
   muni_2012 <- get_municipalities(2012)
   muni_2013 <- get_municipalities(2013) # The year princeton township disappeared
   muni_2021 <- get_municipalities(2021)
+  muni_2022 <- get_municipalities(2022) # The year pine valley disappeared
   expect_equal(nrow(muni_2000), 566)
   expect_equal(nrow(muni_2012), 566)
   expect_equal(nrow(muni_2013), 565)
   expect_equal(nrow(muni_2021), 565)
+  expect_equal(nrow(muni_2022), 564)
 })
 
 test_that("get_municipalities handles Caldwell", {
@@ -40,6 +42,14 @@ test_that("get_municipalities handles Princeton", {
   expect_true( boro_geoid %in% muni_2012 )
   expect_false( twp_geoid %in% muni_2013 )
   expect_true( boro_geoid %in% muni_2013 )
+})
+
+test_that("get_municipalities handles Pine Valley", {
+  pv_geod <- "3400758920"
+  muni_2021 <- get_municipalities(2021) %>% dplyr::pull(GEOID)
+  muni_2022 <- get_municipalities(2022) %>% dplyr::pull(GEOID)
+  expect_true( pv_geod %in% muni_2021 )
+  expect_false( pv_geod %in% muni_2022 )
 })
 
 test_that("get_municipalities handles reference year in past", {
@@ -135,12 +145,12 @@ test_that("get_municipalities handles geoid_ref_as_ref_column", {
 
 test_that("get_geoid_cross_references handles bad years", {
   expect_error(get_geoid_cross_references(2000, 1999:2021))
-  expect_error(get_geoid_cross_references(2000, 2000:2022))
+  expect_error(get_geoid_cross_references(2000, 2000:2023))
 })
 
 test_that("get_geoid_cross_references handles bad reference year", {
   expect_error(get_geoid_cross_references(1999, 2010))
-  expect_error(get_geoid_cross_references(2022, 2010))
+  expect_error(get_geoid_cross_references(2023, 2010))
 })
 
 

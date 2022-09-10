@@ -1,5 +1,5 @@
 MIN_YEAR <- 2000
-MAX_YEAR <- 2021
+MAX_YEAR <- 2022
 YEARS <- MIN_YEAR:MAX_YEAR
 
 #' Internal function get_municipalities_
@@ -36,14 +36,14 @@ get_municipalities_ <- function(year = MAX_YEAR, geoid_reference_year = year) {
 #'
 #' To use the GEOIDs from a different year, specify `geoid_year`.
 #' If `year` < 2013 and `geoid_year` >= 2013, then the `GEOID` for
-#' for Princeton township will the GEOID in use until 2013, when
+#' Princeton township will the GEOID in use until 2013, when
 #' the township ceased to exist.
 #'
 #' The reference-year GEOID will replace the actual GEOID, unless
 #' `geoid_ref_as_ref_column` is `TRUE`, in which case the reference
 #' year GEOID will be put in a separate column called `GEOID_ref`.
 #'
-#' @param year The year, from 2000 to 2021. The default is 2021.
+#' @param year The year, from 2000 to 2022. The default is 2022.
 #' @param geoid_year The year to use for GEOIDs
 #' @param geoid_ref_as_ref_column If TRUE, add a separate column for the reference GEOID
 #' @return A table with `GEOID`, `county` and `municipality`

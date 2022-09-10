@@ -9,7 +9,7 @@
 <!-- badges: end -->
 
 This is a data package for R that contains every county and municipality
-in New Jersey, from 2000 to 2021.
+in New Jersey, from 2000 to 2022.
 
 ## Installation
 
@@ -21,9 +21,9 @@ You can install the development version of njmunicipalities from
 devtools::install_github("tor-gu/njmunicipalities")
 ```
 
-## Changes in NJ municipalites, 2000-2021
+## Changes in NJ municipalites, 2000-2022
 
-Over the period 2000-2021, there have been several changes to the list
+Over the period 2000-2022, there have been several changes to the list
 of municipalities in New Jersey:
 
 -   In 2005, South Belmar became Lake Como. The US Census assigned a new
@@ -40,21 +40,22 @@ of municipalities in New Jersey:
     municipality retained the Princeton borough GEOID, though the US
     Census started using the name ‘Princeton’ in place of ‘Princeton
     borough’ for the merged municipality.
+-   In 2022, Pine Valley was absorbed by Pine Hill.
 
 This package will return municipality tables for any year from 2000 to
-2021, and provides tools for dealing the changes from year to year.
+2022, and provides tools for dealing the changes from year to year.
 
 ## Examples
 
 #### Get a table of municipalities
 
 Function `get_municipalities` returns a table of municipalities for a
-given year. The default is year 2021.
+given year. The default is year 2022.
 
 ``` r
 library(njmunicipalities)
 
-# Municipality table for 2021
+# Municipality table for 2022
 get_municipalities() |> head(n=5)
 #> # A tibble: 5 × 3
 #>   GEOID      county          municipality        
@@ -66,7 +67,7 @@ get_municipalities() |> head(n=5)
 #> 5 3400108710 Atlantic County Buena Vista township
 ```
 
-If the year is specified (from 2000 to 2021), the table will reflect the
+If the year is specified (from 2000 to 2022), the table will reflect the
 names and US Census GEOIDs in effect for that year. Here is the list for
 2007.
 
@@ -186,9 +187,9 @@ get_geoid_cross_references(2005, 2010:2020) |>
 
 Princeton township and Princeton borough merged in 2013. Because the
 merged municipality retained Princeton borough’s GEOID, Princeton
-township disappears in 2013. This is the only example of a disappearing
-municipality in the package (but see [Pine Valley and the year
-2022](#pine-valley-and-the-year-2022)).
+township disappears in 2013. This is one of two examples of a
+disappearing municipality in the package (see [Dealing with Pine Valley
+and Pine Hill](#dealing-with-pine-valley-and-pine-hill)).
 
 The functions `get_municipality` and `get_geoid_cross_references` will
 return `NA` for a reference year GEOID after 2012 for Princeton
@@ -240,15 +241,24 @@ election_by_municipality_combined |>
 #> 5  2004 President 3402160900 Libertarian Party     40
 ```
 
-#### Pine Valley and the year 2022
+#### Dealing with Pine Valley and Pine Hill
 
-In 2022, Pine Valley borough was merged into Pine Hill borough. The
-current version of this package does not cover the year 2022 because the
-[US Census
-Gazetteer](https://www.census.gov/geographies/reference-files/time-series/geo/gazetteer-files.html)
-for 2022 has not yet been published.
+In 2022, Pine Valley borough was merged into Pine Hill borough.
 
-As a conveniene for dealing with 2022 datasets, this package includes
+The functions `get_municipality` and `get_geoid_cross_references` will
+return `NA` for a reference year GEOID after 2021 for Pine Valley:
+
+``` r
+# Pine Valley existed in 2021 but not 2022
+get_municipalities(2021, geoid_year = 2022) |>
+  dplyr::filter(is.na(GEOID))
+#> # A tibble: 1 × 3
+#>   GEOID county        municipality       
+#>   <chr> <chr>         <chr>              
+#> 1 <NA>  Camden County Pine Valley borough
+```
+
+For convenience in dealing with this issue, this package includes
 constants `PINE_VALLEY_BORO_GEOID` and `PINE_HILL_BORO_GEOID`.
 
 ``` r
