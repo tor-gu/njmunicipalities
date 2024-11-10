@@ -1,12 +1,12 @@
 Package: njmunicipalities
 Type: Package
 Title: NJ Municipalities data package
-Version: 1.1.0
+Version: 1.2.0
 Authors@R: 
     person("Tor", "Gunston", , "tor.gunston@protonmail.com", role = c("aut", "cre"))
-Description: NJ Municipalities, 2000-2022.
+Description: NJ Municipalities, 2000-2024.
     Name and GEOID for every NJ municipality and county, for the
-    years 2000-2022.
+    years 2000-2024.
 License: CC0
 Encoding: UTF-8
 LazyData: true
