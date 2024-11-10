@@ -19,7 +19,7 @@ gz_2000 <- readr::read_fwf(gz_2000_file,
 municipalities <- gz_2000 |>
   dplyr::mutate(GEOID_Y2K = GEOID,
                 first_year = 2000,
-                final_year = 2022) |>
+                final_year = 2024) |>
   dplyr::relocate(GEOID_Y2K)
 
 municipality_updates <- tibble::tribble(
@@ -36,12 +36,12 @@ municipality_updates <- tibble::tribble(
 
 municipality_inserts <- tibble::tribble(
   ~GEOID_Y2K,  ~GEOID,      ~county,          ~municipality,         ~first_year,~final_year,
-  "3401309220","3401309250","Essex County",   "Caldwell borough",     2010,      2022,
-  "3402177210","3402163850","Mercer County",  "Robbinsville township",2008,      2022,
-  "3402568670","3402537560","Monmouth County","Lake Como borough",    2005,      2022,
-  "3402918130","3402973125","Ocean County",   "Toms River township",  2007,      2022,
-  "3403179820","3403182423","Passaic County", "Woodland Park borough",2009,      2022,
-  "3402160900","3402160900","Mercer County",  "Princeton",            2013,      2022,
+  "3401309220","3401309250","Essex County",   "Caldwell borough",     2010,      2024,
+  "3402177210","3402163850","Mercer County",  "Robbinsville township",2008,      2024,
+  "3402568670","3402537560","Monmouth County","Lake Como borough",    2005,      2024,
+  "3402918130","3402973125","Ocean County",   "Toms River township",  2007,      2024,
+  "3403179820","3403182423","Passaic County", "Woodland Park borough",2009,      2024,
+  "3402160900","3402160900","Mercer County",  "Princeton",            2013,      2024,
 )
 
 municipalities <- municipalities |>

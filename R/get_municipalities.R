@@ -98,7 +98,7 @@ get_geoid_cross_references <- function(reference_year, years) {
   }
   if (!all(dplyr::between(years, MIN_YEAR, MAX_YEAR))) {
     stop("Cannot return municipalities with years = ",
-         stringr::str_c(head(setdiff(years, YEARS), 5), collapse=" "))
+         stringr::str_c(utils::head(setdiff(years, YEARS), 5), collapse=" "))
   }
 
   years |> unique() |>
