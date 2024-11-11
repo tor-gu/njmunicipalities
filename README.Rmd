@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 This is a data package for R that contains every county
-and municipality in New Jersey, from 2000 to 2022.
+and municipality in New Jersey, from 2000 to 2024.
 
 ## Installation
 
@@ -31,9 +31,9 @@ You can install the development version of njmunicipalities from [GitHub](https:
 devtools::install_github("tor-gu/njmunicipalities")
 ```
 
-## Changes in NJ municipalites, 2000-2022
+## Changes in NJ municipalites, 2000-2024
 
-Over the period 2000-2022, there have been several changes to
+Over the period 2000-2024, there have been several changes to
 the list of municipalities in New Jersey:
 
 * In 2005, South Belmar became Lake Como. The US Census assigned
@@ -46,19 +46,19 @@ a new GEOID to Lake Como.
 * In 2022, Pine Valley was absorbed by Pine Hill.
 
 This package will return municipality tables for any year from 2000 to
-2022, and provides tools for dealing the changes from year to year.
+2024, and provides tools for dealing the changes from year to year.
 
 ## Examples
 #### Get a table of municipalities
 Function `get_municipalities` returns a table of municipalities for a
-given year. The default is year 2022.
+given year. The default is year 2024.
 ```{r}
 library(njmunicipalities)
 
-# Municipality table for 2022
+# Municipality table for 2024
 get_municipalities() |> head(n=5)
 ```
-If the year is specified (from 2000 to 2022), the table will reflect the names and US Census GEOIDs in effect for that year. Here is the list for 2007.
+If the year is specified (from 2000 to 2024), the table will reflect the names and US Census GEOIDs in effect for that year. Here is the list for 2007.
 ```{r}
 # Municipality list for 2007
 get_municipalities(2007) |> head(n=5)
