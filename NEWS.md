@@ -1,7 +1,7 @@
 # njmunicipalities 1.2.0
 
 * Updating for 2024:
-    * No changes to GEOIDs for names.
+    * No changes to GEOIDs or names.
     * Max year is now 2024.
     
 # njmunicipalities 1.1.0
