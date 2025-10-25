@@ -1,5 +1,5 @@
 MIN_YEAR <- 2000
-MAX_YEAR <- 2024
+MAX_YEAR <- 2025
 YEARS <- MIN_YEAR:MAX_YEAR
 
 #' Internal function get_municipalities_

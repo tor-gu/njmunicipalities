@@ -1,11 +1,11 @@
 test_that("get_municipalities handles bad year", {
   expect_error(get_municipalities(1999))
-  expect_error(get_municipalities(2025))
+  expect_error(get_municipalities(2026))
 })
 
 test_that("get_municipalities handles bad reference year", {
   expect_error(get_municipalities(2010, 1999))
-  expect_error(get_municipalities(2010, 2025))
+  expect_error(get_municipalities(2010, 2026))
 })
 
 
@@ -145,12 +145,12 @@ test_that("get_municipalities handles geoid_ref_as_ref_column", {
 
 test_that("get_geoid_cross_references handles bad years", {
   expect_error(get_geoid_cross_references(2000, 1999:2021))
-  expect_error(get_geoid_cross_references(2000, 2000:2025))
+  expect_error(get_geoid_cross_references(2000, 2000:2026))
 })
 
 test_that("get_geoid_cross_references handles bad reference year", {
   expect_error(get_geoid_cross_references(1999, 2010))
-  expect_error(get_geoid_cross_references(2025, 2010))
+  expect_error(get_geoid_cross_references(2026, 2010))
 })
 
 
