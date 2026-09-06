@@ -43,7 +43,7 @@ get_municipalities_ <- function(year = MAX_YEAR, geoid_reference_year = year) {
 #' `geoid_ref_as_ref_column` is `TRUE`, in which case the reference
 #' year GEOID will be put in a separate column called `GEOID_ref`.
 #'
-#' @param year The year, from 2000 to 2024. The default is 2024.
+#' @param year The year, from 2000 to 2025. The default is 2025.
 #' @param geoid_year The year to use for GEOIDs
 #' @param geoid_ref_as_ref_column If TRUE, add a separate column for the reference GEOID
 #' @return A table with `GEOID`, `county` and `municipality`
