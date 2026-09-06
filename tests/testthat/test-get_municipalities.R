@@ -196,3 +196,48 @@ test_that("get_geoid_cross_references handles reference in the future", {
   expect_equal(nrow(dplyr::anti_join(muni_2000_2020, xref_2000_2020)), 0)
   expect_equal(nrow(dplyr::anti_join(xref_2000_2020, muni_2000_2020)), 0)
 })
+
+test_that("exported GEOID constants have the documented values", {
+  expect_identical(PRINCETON_BORO_GEOID, "3402160900")
+  expect_identical(PRINCETON_TWP_GEOID, "3402160915")
+  expect_identical(PINE_VALLEY_BORO_GEOID, "3400758920")
+  expect_identical(PINE_HILL_BORO_GEOID, "3400758770")
+})
+
+test_that("the Princeton constants name the municipalities they claim to", {
+  muni_2012 <- get_municipalities(2012)
+  muni_2013 <- get_municipalities(2013)
+  name_in <- function(muni, geoid) muni$municipality[muni$GEOID == geoid]
+
+  expect_identical(name_in(muni_2012, PRINCETON_TWP_GEOID), "Princeton township")
+  expect_identical(name_in(muni_2012, PRINCETON_BORO_GEOID), "Princeton borough")
+  # the merged municipality keeps the borough GEOID but drops the suffix
+  expect_identical(name_in(muni_2013, PRINCETON_BORO_GEOID), "Princeton")
+  expect_length(name_in(muni_2013, PRINCETON_TWP_GEOID), 0)
+})
+
+test_that("the Pine Valley constants name the municipalities they claim to", {
+  muni_2021 <- get_municipalities(2021)
+  muni_2022 <- get_municipalities(2022)
+  name_in <- function(muni, geoid) muni$municipality[muni$GEOID == geoid]
+
+  expect_identical(name_in(muni_2021, PINE_VALLEY_BORO_GEOID), "Pine Valley borough")
+  expect_identical(name_in(muni_2021, PINE_HILL_BORO_GEOID), "Pine Hill borough")
+  # Pine Valley is absorbed, Pine Hill survives with its own GEOID
+  expect_length(name_in(muni_2022, PINE_VALLEY_BORO_GEOID), 0)
+  expect_identical(name_in(muni_2022, PINE_HILL_BORO_GEOID), "Pine Hill borough")
+})
+
+test_that("get_geoid_cross_references ignores duplicate years", {
+  expect_identical(get_geoid_cross_references(2005, c(2010, 2010)),
+                   get_geoid_cross_references(2005, 2010))
+  expect_identical(get_geoid_cross_references(2005, c(2010, 2011, 2010)),
+                   get_geoid_cross_references(2005, c(2010, 2011)))
+})
+
+test_that("get_geoid_cross_references returns an integer year column", {
+  xref <- get_geoid_cross_references(2005, 2010:2012)
+  expect_named(xref, c("year", "GEOID_ref", "GEOID"))
+  expect_type(xref$year, "integer")
+  expect_setequal(unique(xref$year), 2010:2012)
+})
