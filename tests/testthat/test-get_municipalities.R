@@ -8,6 +8,31 @@ test_that("get_municipalities handles bad reference year", {
   expect_error(get_municipalities(2010, 2026))
 })
 
+test_that("get_municipalities rejects years that are not a single number", {
+  expect_error(get_municipalities(c(2000, 2001)), "single year")
+  expect_error(get_municipalities(integer(0)), "single year")
+  expect_error(get_municipalities(NA), "must be numeric")
+  expect_error(get_municipalities("2005"), "must be numeric")
+  expect_error(get_municipalities(2005, c(2000, 2001)), "single year")
+  expect_error(get_municipalities(2005, NA), "must be numeric")
+})
+
+test_that("get_geoid_cross_references validates its year arguments", {
+  expect_error(get_geoid_cross_references(c(2000, 2001), 2010), "single year")
+  expect_error(get_geoid_cross_references("2010", 2011), "must be numeric")
+  expect_error(get_geoid_cross_references(2010, integer(0)), "at least one year")
+  expect_error(get_geoid_cross_references(2010, NA), "must be numeric")
+  expect_error(get_geoid_cross_references(2010, c(2011, NA)), "years = NA")
+})
+
+test_that("bad-year messages name the offending years", {
+  expect_error(get_municipalities(1999), "for year = 1999")
+  expect_error(get_municipalities(2010, 2026), "for geoid_year = 2026")
+  expect_error(get_geoid_cross_references(1999, 2010), "for reference_year = 1999")
+  expect_error(get_geoid_cross_references(2010, c(1998, 1999, 2011)),
+               "for years = 1998 1999")
+})
+
 
 test_that("get_municipalities returns the correct table size", {
   muni_2000 <- get_municipalities(2000)

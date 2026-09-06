@@ -1,6 +1,45 @@
 MIN_YEAR <- 2000
 MAX_YEAR <- 2025
-YEARS <- MIN_YEAR:MAX_YEAR
+
+#' Internal function check_year_
+#'
+#' Stop unless `year` is a single year within the range covered by this
+#' package. Without this check, a vector, NA or character year reaches
+#' `if` or `dplyr::between` and fails with an opaque message.
+#' @param year Year
+#' @param argument Name of the argument being checked, used in the error message
+check_year_ <- function(year, argument) {
+  if (!is.numeric(year)) {
+    stop("`", argument, "` must be numeric, not ", class(year)[[1L]])
+  }
+  if (length(year) != 1L) {
+    stop("`", argument, "` must be a single year, not ", length(year), " values")
+  }
+  if (is.na(year) || !dplyr::between(year, MIN_YEAR, MAX_YEAR)) {
+    stop("Cannot return municipalities for ", argument, " = ", year)
+  }
+  invisible(year)
+}
+
+#' Internal function check_years_
+#'
+#' Stop unless `years` is a non-empty vector of years within the range
+#' covered by this package. The error names up to five offending years.
+#' @param years Years
+check_years_ <- function(years) {
+  if (!is.numeric(years)) {
+    stop("`years` must be numeric, not ", class(years)[[1L]])
+  }
+  if (length(years) == 0L) {
+    stop("`years` must contain at least one year")
+  }
+  bad <- years[is.na(years) | !dplyr::between(years, MIN_YEAR, MAX_YEAR)]
+  if (length(bad)) {
+    stop("Cannot return municipalities for years = ",
+         stringr::str_c(utils::head(bad, 5), collapse = " "))
+  }
+  invisible(years)
+}
 
 #' Internal function get_municipalities_
 #'
@@ -63,12 +102,8 @@ get_municipalities_ <- function(year = MAX_YEAR, geoid_reference_year = year) {
 #' @export
 get_municipalities <- function(year = MAX_YEAR, geoid_year = year,
                                geoid_ref_as_ref_column = FALSE) {
-  if (!dplyr::between(year, MIN_YEAR, MAX_YEAR)) {
-    stop("Cannot return municipalities for year = ", year)
-  }
-  if (!dplyr::between(geoid_year, MIN_YEAR, MAX_YEAR)) {
-    stop("Cannot return municipalities with geoid_year = ", geoid_year)
-  }
+  check_year_(year, "year")
+  check_year_(geoid_year, "geoid_year")
   if (geoid_ref_as_ref_column) {
     get_municipalities_(year, geoid_year)
   } else {
@@ -93,13 +128,8 @@ get_municipalities <- function(year = MAX_YEAR, geoid_year = year,
 #'   dplyr::arrange(GEOID_ref)
 #' @export
 get_geoid_cross_references <- function(reference_year, years) {
-  if (!dplyr::between(reference_year, MIN_YEAR, MAX_YEAR)) {
-    stop("Cannot return municipalities for reference_year = ", reference_year)
-  }
-  if (!all(dplyr::between(years, MIN_YEAR, MAX_YEAR))) {
-    stop("Cannot return municipalities with years = ",
-         stringr::str_c(utils::head(setdiff(years, YEARS), 5), collapse=" "))
-  }
+  check_year_(reference_year, "reference_year")
+  check_years_(years)
 
   years |> unique() |>
     purrr::set_names() |>

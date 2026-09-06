@@ -18,8 +18,8 @@ Imports:
     purrr,
     stringr,
     utils
-RoxygenNote: 7.3.2
 Suggests: 
     testthat (>= 3.0.0),
     tibble
 Config/testthat/edition: 3
+Config/roxygen2/version: 8.1.0
