@@ -19,7 +19,10 @@ Imports:
     stringr,
     utils
 Suggests: 
+    fs,
+    readr,
     testthat (>= 3.0.0),
-    tibble
+    tibble,
+    usethis
 Config/testthat/edition: 3
 Config/roxygen2/version: 8.1.0
