@@ -1,3 +1,9 @@
+# njmunicipalities 1.3.1
+
+* Minimum R version is now 4.1.0.
+* Clearer errors for invalid year arguments.
+* No data changes.
+
 # njmunicipalities 1.3.0
 
 * Updating for 2025:
