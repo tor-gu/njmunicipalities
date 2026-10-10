@@ -1,11 +1,11 @@
 test_that("get_municipalities handles bad year", {
   expect_error(get_municipalities(1999))
-  expect_error(get_municipalities(2026))
+  expect_error(get_municipalities(2027))
 })
 
 test_that("get_municipalities handles bad reference year", {
   expect_error(get_municipalities(2010, 1999))
-  expect_error(get_municipalities(2010, 2026))
+  expect_error(get_municipalities(2010, 2027))
 })
 
 test_that("get_municipalities rejects years that are not a single number", {
@@ -27,7 +27,7 @@ test_that("get_geoid_cross_references validates its year arguments", {
 
 test_that("bad-year messages name the offending years", {
   expect_error(get_municipalities(1999), "for year = 1999")
-  expect_error(get_municipalities(2010, 2026), "for geoid_year = 2026")
+  expect_error(get_municipalities(2010, 2027), "for geoid_year = 2027")
   expect_error(get_geoid_cross_references(1999, 2010), "for reference_year = 1999")
   expect_error(get_geoid_cross_references(2010, c(1998, 1999, 2011)),
                "for years = 1998 1999")
@@ -40,11 +40,13 @@ test_that("get_municipalities returns the correct table size", {
   muni_2013 <- get_municipalities(2013) # The year princeton township disappeared
   muni_2021 <- get_municipalities(2021)
   muni_2022 <- get_municipalities(2022) # The year pine valley disappeared
+  muni_2026 <- get_municipalities(2026)
   expect_equal(nrow(muni_2000), 566)
   expect_equal(nrow(muni_2012), 566)
   expect_equal(nrow(muni_2013), 565)
   expect_equal(nrow(muni_2021), 565)
   expect_equal(nrow(muni_2022), 564)
+  expect_equal(nrow(muni_2026), 564)
 })
 
 test_that("get_municipalities handles Caldwell", {
@@ -56,6 +58,26 @@ test_that("get_municipalities handles Caldwell", {
   expect_false( new_geoid %in% muni_2009 )
   expect_false( old_geoid %in% muni_2010 )
   expect_true( new_geoid %in% muni_2010 )
+})
+
+test_that("get_municipalities handles South Orange", {
+  old_geoid <- "3401369274"
+  new_geoid <- "3401369270"
+  muni_2025 <- get_municipalities(2025) %>% dplyr::pull(GEOID)
+  muni_2026 <- get_municipalities(2026)
+  expect_true( old_geoid %in% muni_2025 )
+  expect_false( new_geoid %in% muni_2025 )
+  expect_false( old_geoid %in% muni_2026$GEOID )
+  expect_true( new_geoid %in% muni_2026$GEOID )
+  expect_equal(
+    muni_2026 |> dplyr::filter(GEOID == new_geoid) |> dplyr::pull(municipality),
+    "South Orange village"
+  )
+  muni_2000_2026 <- get_municipalities(2000, 2026, geoid_ref_as_ref_column = TRUE)
+  expect_equal(
+    muni_2000_2026 |> dplyr::filter(GEOID == old_geoid) |> dplyr::pull(GEOID_ref),
+    new_geoid
+  )
 })
 
 test_that("get_municipalities handles Princeton", {
@@ -170,12 +192,12 @@ test_that("get_municipalities handles geoid_ref_as_ref_column", {
 
 test_that("get_geoid_cross_references handles bad years", {
   expect_error(get_geoid_cross_references(2000, 1999:2021))
-  expect_error(get_geoid_cross_references(2000, 2000:2026))
+  expect_error(get_geoid_cross_references(2000, 2000:2027))
 })
 
 test_that("get_geoid_cross_references handles bad reference year", {
   expect_error(get_geoid_cross_references(1999, 2010))
-  expect_error(get_geoid_cross_references(2026, 2010))
+  expect_error(get_geoid_cross_references(2027, 2010))
 })
 
 

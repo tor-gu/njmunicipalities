@@ -11,7 +11,7 @@ get_municipalities(
 )
 }
 \arguments{
-\item{year}{The year, from 2000 to 2025. The default is 2025.}
+\item{year}{The year, from 2000 to 2026. The default is 2026.}
 
 \item{geoid_year}{The year to use for GEOIDs}
 

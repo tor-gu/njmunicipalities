@@ -1,3 +1,9 @@
+# njmunicipalities 1.4.0
+
+* Updating for 2026:
+    * South Orange Village township (3401369274) became South Orange village (3401369270).
+    * Max year is now 2026.
+
 # njmunicipalities 1.3.1
 
 * Minimum R version is now 4.1.0.

@@ -9,7 +9,7 @@
 <!-- badges: end -->
 
 This is a data package for R that contains every county and municipality
-in New Jersey, from 2000 to 2025.
+in New Jersey, from 2000 to 2026.
 
 ## Installation
 
@@ -21,9 +21,9 @@ You can install the development version of njmunicipalities from
 devtools::install_github("tor-gu/njmunicipalities")
 ```
 
-## Changes in NJ municipalites, 2000-2025
+## Changes in NJ municipalites, 2000-2026
 
-Over the period 2000-2025, there have been several changes to the list
+Over the period 2000-2026, there have been several changes to the list
 of municipalities in New Jersey:
 
 - In 2005, South Belmar became Lake Como. The US Census assigned a new
@@ -41,21 +41,23 @@ of municipalities in New Jersey:
   Census started using the name ‘Princeton’ in place of ‘Princeton
   borough’ for the merged municipality.
 - In 2022, Pine Valley was absorbed by Pine Hill.
+- In 2026, South Orange Village township became South Orange village,
+  and was assigned a new GEOID.
 
 This package will return municipality tables for any year from 2000 to
-2025, and provides tools for dealing the changes from year to year.
+2026, and provides tools for dealing the changes from year to year.
 
 ## Examples
 
 #### Get a table of municipalities
 
 Function `get_municipalities` returns a table of municipalities for a
-given year. The default is year 2025.
+given year. The default is year 2026.
 
 ``` r
 library(njmunicipalities)
 
-# Municipality table for 2025
+# Municipality table for 2026
 get_municipalities() |> head(n=5)
 #> # A tibble: 5 × 3
 #>   GEOID      county          municipality        
@@ -67,7 +69,7 @@ get_municipalities() |> head(n=5)
 #> 5 3400108710 Atlantic County Buena Vista township
 ```
 
-If the year is specified (from 2000 to 2025), the table will reflect the
+If the year is specified (from 2000 to 2026), the table will reflect the
 names and US Census GEOIDs in effect for that year. Here is the list for
 2007.
 
@@ -270,7 +272,7 @@ c(PINE_VALLEY_BORO_GEOID, PINE_HILL_BORO_GEOID)
 
 For convenience, this package also includes a table of counties and
 their GEOIDS. There have been no changes to New Jersey counties from
-2000 to 2025.
+2000 to 2026.
 
 ``` r
 # County list

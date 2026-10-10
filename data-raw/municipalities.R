@@ -19,7 +19,7 @@ gz_2000 <- readr::read_fwf(gz_2000_file,
 municipalities <- gz_2000 |>
   dplyr::mutate(GEOID_Y2K = GEOID,
                 first_year = 2000,
-                final_year = 2025) |>
+                final_year = 2026) |>
   dplyr::relocate(GEOID_Y2K)
 
 municipality_updates <- tibble::tribble(
@@ -32,16 +32,18 @@ municipality_updates <- tibble::tribble(
   "3402160900", 2012, # Princeton borough became just-plain Princeton in 2013
   "3402160915", 2012, # Princeton twp was absorbed by Princeton boro in 2013
   "3400758920", 2021, # Pine Valley boro was absorbed by Pine Hill boro in 2022
+  "3401369274", 2025, # South Orange Village twp became South Orange village in 2026
 )
 
 municipality_inserts <- tibble::tribble(
   ~GEOID_Y2K,  ~GEOID,      ~county,          ~municipality,         ~first_year,~final_year,
-  "3401309220","3401309250","Essex County",   "Caldwell borough",     2010,      2025,
-  "3402177210","3402163850","Mercer County",  "Robbinsville township",2008,      2025,
-  "3402568670","3402537560","Monmouth County","Lake Como borough",    2005,      2025,
-  "3402918130","3402973125","Ocean County",   "Toms River township",  2007,      2025,
-  "3403179820","3403182423","Passaic County", "Woodland Park borough",2009,      2025,
-  "3402160900","3402160900","Mercer County",  "Princeton",            2013,      2025,
+  "3401309220","3401309250","Essex County",   "Caldwell borough",     2010,      2026,
+  "3402177210","3402163850","Mercer County",  "Robbinsville township",2008,      2026,
+  "3402568670","3402537560","Monmouth County","Lake Como borough",    2005,      2026,
+  "3402918130","3402973125","Ocean County",   "Toms River township",  2007,      2026,
+  "3403179820","3403182423","Passaic County", "Woodland Park borough",2009,      2026,
+  "3402160900","3402160900","Mercer County",  "Princeton",            2013,      2026,
+  "3401369274","3401369270","Essex County",   "South Orange village", 2026,      2026,
 )
 
 municipalities <- municipalities |>
